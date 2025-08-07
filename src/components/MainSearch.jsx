@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadingFalseAction } from "../redux/actions";
 import { loadingTrueAction } from "../redux/actions";
 import { Spinner } from "react-bootstrap";
+import { GET_JOBS } from "../redux/actions";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
@@ -47,7 +48,7 @@ const MainSearch = () => {
           .then((data) => {
             console.log(data);
             dispatch({
-              type: "GET_JOBS",
+              type: GET_JOBS,
               payload: data.data,
             });
 

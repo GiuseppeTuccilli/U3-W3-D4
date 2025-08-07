@@ -1,5 +1,8 @@
 export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
+export const GET_JOBS = "GET_JOBS";
+export const LOADING_FALSE = "LOADING_FALSE";
+export const LOADING_TRUE = "LOADING_TRUE";
 
 export const AddToFavoritesAction = (job) => {
   return {
@@ -17,14 +20,14 @@ export const deleteFromFavoritesAction = (id) => {
 
 export const loadingFalseAction = () => {
   return {
-    type: "LOADING_FALSE",
+    type: LOADING_FALSE,
     payload: false,
   };
 };
 
 export const loadingTrueAction = () => {
   return {
-    type: "LOADING_TRUE",
+    type: LOADING_TRUE,
     payload: true,
   };
 };

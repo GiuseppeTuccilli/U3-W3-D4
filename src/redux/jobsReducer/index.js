@@ -1,10 +1,12 @@
+import { GET_JOBS } from "../actions";
+
 const initaialState = {
   jobs: [],
 };
 
 const jobsReducer = (state = initaialState, action) => {
   switch (action.type) {
-    case "GET_JOBS":
+    case GET_JOBS:
       return {
         ...state,
         jobs: action.payload,
