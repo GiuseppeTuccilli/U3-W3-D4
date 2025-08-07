@@ -3,6 +3,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { deleteFromFavoritesAction } from "../redux/actions";
 
 const Favorites = () => {
   const fav = useSelector((state) => {
@@ -36,10 +37,7 @@ const Favorites = () => {
                 <Button
                   variant="danger"
                   onClick={() => {
-                    dispatch({
-                      type: "REMOVE_FROM_FAVORITES",
-                      payload: f._id,
-                    });
+                    dispatch(deleteFromFavoritesAction(f._id));
                   }}
                 >
                   Elimina
