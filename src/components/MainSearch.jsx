@@ -3,6 +3,9 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Job from "./Job";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { loadingFalseAction } from "../redux/actions";
+import { loadingTrueAction } from "../redux/actions";
+import { Spinner } from "react-bootstrap";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
@@ -13,6 +16,10 @@ const MainSearch = () => {
     return state.jobs.jobs;
   });
 
+  const isLoading = useSelector((state) => {
+    return state.loading.isLoading;
+  });
+
   const baseEndpoint =
     "https://strive-benchmark.herokuapp.com/api/jobs?search=";
 
@@ -20,8 +27,9 @@ const MainSearch = () => {
     setQuery(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(loadingTrueAction());
 
     dispatch(
       (
@@ -42,7 +50,10 @@ const MainSearch = () => {
               type: "GET_JOBS",
               payload: data.data,
             });
+
+            dispatch(loadingFalseAction());
           })
+
           .catch((er) => {
             console.log(er);
           });
@@ -87,9 +98,13 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
-          ))}
+          {isLoading === false ? (
+            jobs.map((jobData) => <Job key={jobData._id} data={jobData} />)
+          ) : (
+            <div className="text-center mt-3">
+              <Spinner variant="danger"></Spinner>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

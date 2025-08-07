@@ -14,3 +14,17 @@ export const deleteFromFavoritesAction = (id) => {
     payload: id,
   };
 };
+
+export const loadingFalseAction = () => {
+  return {
+    type: "LOADING_FALSE",
+    payload: false,
+  };
+};
+
+export const loadingTrueAction = () => {
+  return {
+    type: "LOADING_TRUE",
+    payload: true,
+  };
+};
